@@ -25,7 +25,7 @@ ModelSoup seems to work for ResNet with following two fixes.
 ### Fine tuning
 
 Since timm uses random weight when num_classes isn't identical to pretrained weight,
-original fine-tuning implementaion of ResNetand EfficientNet Effi doesn't share ResNet FC weights.
+original fine-tuning implementaion of ResNet and EfficientNet doesn't share ResNet FC weights.
 ```Python
 model = timm.create_model(models[chosen_model]['model_name'], pretrained=True, num_classes=100)
 ```

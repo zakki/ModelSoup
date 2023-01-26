@@ -20,7 +20,6 @@ class CIFAR100Evaluator(Evaluator):
 
         trainset = torchvision.datasets.CIFAR100(root='./data/CIFAR100', train=True,
                                        download=True, transform=data_transforms["test"])
-        valset, testset = torch.utils.data.random_split(testset, [5000, 5000])
         testset = torchvision.datasets.CIFAR100(root='./data/CIFAR100', train=False,
                                        download=True, transform=data_transforms["test"])
         valset, testset = torch.utils.data.random_split(testset, [5000, 5000])
