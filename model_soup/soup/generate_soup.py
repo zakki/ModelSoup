@@ -101,7 +101,11 @@ def make_soup(models_folder, soup, evaluator, num_ingradients=0, num_passes=1, d
                 soup_next = deepcopy(soup)
                 soup_next, N = add_ingradient(soup_next, filePath, N)
                 new_performance = evaluator.eval_func(soup_next,'valid')
-            
+                print(f"new perf: {new_performance}")
+
+                torch.optim.swa_utils.update_bn(evaluator.trainloader, soup_next, device=device)
+                new_performance = evaluator.eval_func(soup_next,'valid')
+                print(f"new perf bn: {new_performance}")
 
                 if method == Methods.GREEDY:
                     print(f"new perf: {new_performance}")

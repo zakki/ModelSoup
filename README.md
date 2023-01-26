@@ -18,6 +18,25 @@ In this paper, we compare Model Soups performances on three different models (Re
 * Notebook used to test [model soups](https://colab.research.google.com/drive/1yyRSK9x35gErpMy_LQjB4ULR8GagSVVJ?usp=sharing)
 * Notebook used to [fine-tune vision models](https://colab.research.google.com/drive/13nYqc5F9L5WVBy3mRYlZBGCf0ekENYMk?usp=sharing)
 
+## Changes
+
+ModelSoup seems to work for ResNet with following two fixes.
+
+### Fine tuning
+
+Since timm uses random weight when num_classes isn't identical to pretrained weight,
+original fine-tuning implementaion of ResNetand EfficientNet Effi doesn't share ResNet FC weights.
+```Python
+model = timm.create_model(models[chosen_model]['model_name'], pretrained=True, num_classes=100)
+```
+* Notebook used to [fine-tune vision models](https://colab.research.google.com/drive/1P7IIad20bQkGXhMg2Is5U2T_nqsn-DIo)
+
+### Batch Normalization
+
+The original `model_soup.soup.generate_soup` is just averaging model weights.
+But this implemenation spoils statistics of batch-normalization.
+https://pytorch.org/blog/stochastic-weight-averaging-in-pytorch/
+
 ## Getting Started
 
 Clone and install the library using the following: 
