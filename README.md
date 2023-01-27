@@ -24,12 +24,15 @@ ModelSoup seems to work for ResNet with following two fixes.
 
 ### Fine tuning
 
-Since timm uses random weight when num_classes isn't identical to pretrained weight,
-original fine-tuning implementaion of ResNet and EfficientNet doesn't share ResNet FC weights.
+Since timm uses random weights for last full connected layer if num_classes isn't identical to pretrained weight,
+original fine-tuning implementaion of ResNet and EfficientNet doesn't share FC weights.
+So averaging these FC weights does not make sense.
+
 ```Python
 model = timm.create_model(models[chosen_model]['model_name'], pretrained=True, num_classes=100)
 ```
-* Notebook used to [fine-tune vision models](https://colab.research.google.com/drive/1P7IIad20bQkGXhMg2Is5U2T_nqsn-DIo)
+
+* Notebook used to [fine-tune and save single base model, and fine-tune models by many hyper parameters](https://colab.research.google.com/drive/1P7IIad20bQkGXhMg2Is5U2T_nqsn-DIo)
 
 ### Batch Normalization
 
